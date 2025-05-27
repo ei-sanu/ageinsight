@@ -1,0 +1,129 @@
+.light-theme {
+  --bg-primary: #FFF9FC;
+  --bg-secondary: #FCF2FF;
+  --text-primary: #121212;
+  --text-secondary: #4B0082;
+  --accent: #8A2BE2;
+  --card-bg: #FFFFFF;
+  --border-color: rgba(138, 43, 226, 0.2);
+  --shadow-color: rgba(138, 43, 226, 0.1);
+}
+
+.dark-theme {
+  --bg-primary: #121212;
+  --bg-secondary: #1E1E1E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #FFC0CB;
+  --accent: #FF69B4;
+  --card-bg: #1E1E1E;
+  --border-color: rgba(255, 105, 180, 0.2);
+  --shadow-color: rgba(255, 105, 180, 0.1);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px var(--shadow-color);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px var(--shadow-color);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.section {
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+/* Loading animation */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loading-text {
+  margin-top: 16px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Age result animation */
+.age-result {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Recommendations section */
+.recommendations {
+  margin-top: 3rem;
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 1rem 0;
+  }
+  
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+}
