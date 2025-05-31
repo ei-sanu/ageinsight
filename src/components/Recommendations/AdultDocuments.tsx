@@ -1,5 +1,5 @@
+import { CreditCard, FileCheck, FileText, Landmark, Import as Passport, UserCheck } from 'lucide-react';
 import React from 'react';
-import { FileText, CreditCard, FileCheck, Landmark, Import as Passport, UserCheck } from 'lucide-react';
 
 interface DocumentCard {
   id: number;
@@ -10,7 +10,13 @@ interface DocumentCard {
   eligibleAge: number;
 }
 
-const AdultDocuments: React.FC = () => {
+interface AdultDocumentsProps {
+  userAge: number;
+  months: number;
+  days: number;
+}
+
+const AdultDocuments: React.FC<AdultDocumentsProps> = ({ userAge, months, days }) => {
   const documents: DocumentCard[] = [
     {
       id: 1,
@@ -62,31 +68,41 @@ const AdultDocuments: React.FC = () => {
     },
   ];
 
+  // Update the eligibility check to include exact 18 years
+  const isEligible = userAge > 18 || (userAge === 18 && (months > 0 || days > 0));
+
+  // Debug log to check values
+  console.log('Age:', userAge, 'Months:', months, 'Days:', days, 'IsEligible:', isEligible);
+
   return (
-    <div className="recommendation-grid">
-      {documents.map((doc) => (
-        <a 
-          key={doc.id}
-          href={doc.link} 
-          target="_blank"
-          rel="noopener noreferrer"
-          className="card p-6 flex flex-col items-center text-center hover:shadow-lg transition-all"
-        >
-          <div className="mb-4 p-3 bg-purple-100 dark:bg-gray-800 rounded-full">
-            {doc.icon}
-          </div>
-          <h3 className="text-xl font-semibold text-purple-700 dark:text-pink-400 mb-2">
-            {doc.title}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-            {doc.description}
-          </p>
-          <span className="inline-block bg-purple-100 dark:bg-gray-800 text-purple-800 dark:text-pink-300 text-xs font-medium px-3 py-1 rounded-full">
-            Eligible at {doc.eligibleAge}+ years
-          </span>
-        </a>
-      ))}
-    </div>
+    <>
+      {isEligible && (
+        <div className="recommendation-grid">
+          {documents.map((doc) => (
+            <a
+              key={doc.id}
+              href={doc.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card p-6 flex flex-col items-center text-center hover:shadow-lg transition-all"
+            >
+              <div className="mb-4 p-3 bg-purple-100 dark:bg-gray-800 rounded-full">
+                {doc.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-purple-700 dark:text-pink-400 mb-2">
+                {doc.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                {doc.description}
+              </p>
+              <span className="inline-block bg-purple-100 dark:bg-gray-800 text-purple-800 dark:text-pink-300 text-xs font-medium px-3 py-1 rounded-full">
+                Eligible at {doc.eligibleAge}+ years
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
